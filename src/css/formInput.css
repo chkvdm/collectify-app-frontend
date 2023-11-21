@@ -1,0 +1,44 @@
+.formInput {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+}
+
+.auth-form-container span {
+  color: red;
+}
+
+input,
+select {
+  padding: 15px;
+  margin: 5px;
+  border-radius: 7px;
+  border: 1px solid gray;
+}
+
+input[name='description'] {
+  height: 10em;
+  width: 40em;
+}
+
+label {
+  margin: 10px 0 3px;
+  text-align: left;
+  font-size: 14px;
+  color: gray;
+}
+
+span {
+  font-size: 12px;
+  padding: 3px;
+  /* color: red; */
+  display: none;
+}
+
+input:invalid[focused='true'] {
+  border: 1px solid red;
+}
+
+input:invalid[focused='true'] ~ span {
+  display: block;
+}

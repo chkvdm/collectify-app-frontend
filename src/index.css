@@ -1,0 +1,11 @@
+:root {
+  --body_background_color: rgb(255, 255, 255);
+  --body_background_color_left: #74ebd5;
+  --body_background_color_right: #acb6e5;
+}
+
+[data-theme='dark'] {
+  --body_background_color: rgb(190, 190, 190);
+  --body_background_color_left: #34675e;
+  --body_background_color_right: #424659;
+}
