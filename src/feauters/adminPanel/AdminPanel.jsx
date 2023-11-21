@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import UsersTable from './UsersTable';
 import Loader from '../../components/Loader';
+import UsersTable from './UsersTable';
 
 const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
