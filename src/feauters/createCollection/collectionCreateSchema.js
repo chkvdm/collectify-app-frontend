@@ -15,6 +15,7 @@ const MAX_FILE_SIZE = 1024000;
 
 const collectionCreateSchema = yup.object().shape({
   name: yup.string().required('Please enter a name'),
+  theme: yup.string().required('Please choose a theme'),
   description: yup
     .string()
     .min(50)

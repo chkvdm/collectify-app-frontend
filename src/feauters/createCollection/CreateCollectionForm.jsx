@@ -86,7 +86,7 @@ const CreateCollectionForm = (props) => {
           <Formik
             initialValues={{
               name: '',
-              theme: themes[0]?.theme,
+              theme: '',
               image: '',
               description: '',
               optionalFields: [],
@@ -120,6 +120,9 @@ const CreateCollectionForm = (props) => {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                   >
+                    <option value="" disabled="disabled">
+                      theme...
+                    </option>
                     {themes.map((theme) => {
                       return (
                         <option key={theme.id} value={theme.theme}>
@@ -216,6 +219,9 @@ const CreateCollectionForm = (props) => {
                                   value={field.value}
                                   {...field}
                                 >
+                                  <option value="" disabled="disabled">
+                                    choose type...
+                                  </option>
                                   {types.map((type) => {
                                     return (
                                       <option key={type.id} value={type.type}>
@@ -242,7 +248,8 @@ const CreateCollectionForm = (props) => {
                       <Button
                         variant="contained"
                         onClick={() =>
-                          arrayHelpers.push({ name: '', type: types[0]?.type })
+                          // arrayHelpers.push({ name: '', type: types[0]?.type })
+                          arrayHelpers.push({ name: '', type: '' })
                         }
                       >
                         {t('add_item_fields')}
