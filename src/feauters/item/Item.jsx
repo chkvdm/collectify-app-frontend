@@ -20,7 +20,7 @@ import CommentList from './CommentList';
 import Loader from '../../components/Loader';
 import CommentForm from './CommentForm';
 
-const socket = io('http://localhost:3001', {
+const socket = io('https://collectify-api-wyxw.onrender.com/', {
   reconnection: true,
 });
 
