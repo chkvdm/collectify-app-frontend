@@ -399,6 +399,7 @@ function useCreateItem(collectionId) {
             `${config.apiBaseUrl}/api/v1/collections/new-item/${collectionId}`,
             {
               item,
+              userId: userInfo.id,
             },
             {
               headers,

@@ -1,42 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TagCloud } from 'react-tagcloud';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
-const data = [
-  { value: 'jQuery', count: 25 },
-  { value: 'MongoDB', count: 18 },
-  { value: 'JavaScript', count: 38 },
-  { value: 'React', count: 30 },
-  { value: 'Nodejs', count: 28 },
-  { value: 'Express.js', count: 25 },
-  { value: 'HTML5', count: 33 },
-  { value: 'CSS3', count: 20 },
-  { value: 'Webpack', count: 22 },
-  { value: 'Babel.js', count: 7 },
-  { value: 'ECMAScript', count: 25 },
-  { value: 'Jest', count: 15 },
-  { value: 'Mocha', count: 17 },
-  { value: 'React Native', count: 27 },
-  { value: 'Angular.js', count: 30 },
-  { value: 'TypeScript', count: 15 },
-  { value: 'Flow', count: 30 },
-  { value: 'NPM', count: 11 },
-  { value: 'jQuery', count: 25 },
-  { value: 'MongoDB', count: 18 },
-  { value: 'JavaScript', count: 38 },
-  { value: 'React', count: 30 },
-];
+import config from '../../config';
+import Loader from '../../components/Loader';
 
-const SimpleCloud = () => (
-  <TagCloud
-    minSize={12}
-    maxSize={35}
-    tags={data}
-    colorOptions={{
-      luminosity: 'random',
-      hue: 'random',
-    }}
-    onClick={(tag) => alert(`'${tag.value}' was selected!`)}
-  />
-);
+const SimpleCloud = (props) => {
+  const navigate = useNavigate();
+  const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    Axios.get(`${config.apiBaseUrl}/api/v1/collections/tags`)
+      .then((response) => response.data)
+      .then((data) => {
+        const value = data.tags.reduce((accumulator, current) => {
+          current.tags.forEach((tag) => {
+            const existingTag = accumulator.find(
+              (item) => item.value === tag.slice(1)
+            );
+            if (existingTag) {
+              existingTag.count++;
+            } else {
+              accumulator.push({ value: tag.slice(1), count: 1 });
+            }
+          });
+          return accumulator;
+        }, []);
+        setTags(value);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  function handleClick(tag) {
+    navigate(`/tag/search/${tag.value}`);
+  }
+
+  return (
+    <div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <TagCloud
+          minSize={12}
+          maxSize={35}
+          tags={tags}
+          colorOptions={{
+            luminosity: 'random',
+            hue: 'random',
+          }}
+          style={{ cursor: 'pointer' }}
+          onClick={(tag) => handleClick(tag)}
+        />
+      )}
+    </div>
+  );
+};
 
 export default SimpleCloud;
