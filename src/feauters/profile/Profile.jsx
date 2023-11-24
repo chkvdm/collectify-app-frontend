@@ -128,7 +128,7 @@ const Profile = () => {
               </>
             )}
             <div className="container">
-              <div className="row">
+              <div className="scrolling-wrapper-flexbox">
                 {collections.map((col, i) => (
                   <CollectionCard
                     key={i}

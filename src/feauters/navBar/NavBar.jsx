@@ -23,7 +23,7 @@ import {
   theme,
 } from '../../css/NavBar';
 import LogInAction from './LogInAction';
-import DarkMode from '../DarkMode/DarkMode';
+import DarkMode from './DarkMode';
 import Loader from '../../components/Loader';
 
 const NavBar = (props) => {
@@ -89,21 +89,27 @@ const NavBar = (props) => {
               <Toolbar variant="dense">
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   <VerifiedIcon
-                    sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+                    sx={{ mr: 1 }}
                     style={{ cursor: 'pointer' }}
                     onClick={() => navigate('/')}
                   />
                 </Typography>
                 <DarkMode />
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+
+                <FormControl sx={{ m: 1, minWidth: 50 }} size="small">
                   <Select
                     labelId="demo-select-small-label"
                     id="demo-select-small"
+                    sx={{
+                      '.MuiOutlinedInput-notchedOutline': {
+                        borderStyle: 'none',
+                      },
+                    }}
                     value={props.lang ? props.lang : 'en'}
                     onChange={handleLangChange}
                   >
-                    <MenuItem value={'en'}>EN</MenuItem>
-                    <MenuItem value={'ru'}>RU</MenuItem>
+                    <MenuItem value={'en'}>{t('en')}</MenuItem>
+                    <MenuItem value={'ru'}>{t('ru')}</MenuItem>
                   </Select>
                 </FormControl>
 
@@ -113,6 +119,7 @@ const NavBar = (props) => {
                   </SearchIconWrapper>
                   <StyledInputBase
                     placeholder={t('search')}
+                    sx={{ width: 150 }}
                     inputProps={{ 'aria-label': 'search' }}
                   />
                 </Search>

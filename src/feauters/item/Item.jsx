@@ -251,52 +251,53 @@ const Item = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <ToastContainer />
-
-          <Box sx={{ pt: 1, pl: 3, pb: 1, bgcolor: '#fafafa' }}>
-            <div>
-              <h1>{itemName}</h1>
-            </div>
-            <Link
-              to={`/collection/${collectionId}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <h6>{collectionName}</h6>
-            </Link>
-          </Box>
-
-          <div>
-            <MaterialReactTable table={table} />
-          </div>
-          <div>
-            {userInfo ? (
-              <>
-                <Box sx={{ pt: 1, pl: 3, pb: 3, bgcolor: '#fafafa' }}>
-                  <h2>{t('add_comment_here')}</h2>
-                  <CommentForm {...{ handleSubmit }} />
-                </Box>
-              </>
-            ) : (
-              <>
-                <Box sx={{ pt: 1, pl: 3, pb: 1, bgcolor: '#fafafa' }}>
-                  <Link to="/login">
-                    <h4>{t('login_for_comment')}</h4>
-                  </Link>
-                </Box>
-              </>
-            )}
-
-            {uiCommentUpdate.map((comment) => (
-              <Paper
-                key={comment.id}
-                style={{ maxHeight: '100%', overflow: 'auto' }}
+        <div className="main-container">
+          <div className="container">
+            <ToastContainer />
+            <Box sx={{ ml: 2, mt: 2 }}>
+              <Box>
+                <h1>{itemName}</h1>
+              </Box>
+              <Link
+                to={`/collection/${collectionId}`}
+                style={{ textDecoration: 'none' }}
               >
-                <CommentList {...comment} />
-              </Paper>
-            ))}
+                <h4>{collectionName}</h4>
+              </Link>
+            </Box>
+
+            <Box>
+              <MaterialReactTable table={table} />
+            </Box>
+            <Box>
+              {userInfo ? (
+                <>
+                  <Box sx={{ pt: 1, pl: 3, pb: 3, bgcolor: '#fafafa' }}>
+                    <h2>{t('add_comment_here')}</h2>
+                    <CommentForm {...{ handleSubmit }} />
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Box sx={{ pt: 1, pl: 3, pb: 1, bgcolor: '#fafafa' }}>
+                    <Link to="/login">
+                      <h4>{t('login_for_comment')}</h4>
+                    </Link>
+                  </Box>
+                </>
+              )}
+
+              {uiCommentUpdate.map((comment) => (
+                <Paper
+                  key={comment.id}
+                  style={{ maxHeight: '100%', overflow: 'auto' }}
+                >
+                  <CommentList {...comment} />
+                </Paper>
+              ))}
+            </Box>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

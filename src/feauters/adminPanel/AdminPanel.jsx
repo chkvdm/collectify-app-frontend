@@ -9,9 +9,13 @@ const AdminPanel = () => {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {loading ? <Loader /> : <UsersTable {...{ setLoading }} />}
-    </QueryClientProvider>
+    <div className="main-container">
+      <div className="container">
+        <QueryClientProvider client={queryClient}>
+          {loading ? <Loader /> : <UsersTable {...{ setLoading }} />}
+        </QueryClientProvider>
+      </div>
+    </div>
   );
 };
 

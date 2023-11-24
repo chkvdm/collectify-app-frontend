@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 
 import { registerSchema } from './registerSchema';
+import '../../../css/formInput.css';
 import Alert from '../../../components/Alert';
 
 const RegistrationForm = (props) => {
@@ -32,52 +33,52 @@ const RegistrationForm = (props) => {
 
       <Alert error={props.error} />
 
-      <label htmlFor="name">Name</label>
+      <label htmlFor="name">{t('name')}</label>
       <input
         value={values.name}
         onChange={handleChange}
         id="name"
         type="text"
-        placeholder="Enter your name..."
+        placeholder={t('enter_name')}
         onBlur={handleBlur}
       />
       {errors.name && touched.name && (
         <div style={{ color: 'red' }}>{errors.name}</div>
       )}
 
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email">{t('email')}</label>
       <input
         value={values.email}
         onChange={handleChange}
         id="email"
         type="email"
-        placeholder="Enter your email..."
+        placeholder={t('enter_email')}
         onBlur={handleBlur}
       />
       {errors.email && touched.email && (
         <div style={{ color: 'red' }}>{errors.email}</div>
       )}
 
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">{t('password')}</label>
       <input
         value={values.password}
         onChange={handleChange}
         id="password"
         type="password"
-        placeholder="Enter your password..."
+        placeholder={t('enter_password')}
         onBlur={handleBlur}
       />
       {errors.password && touched.password && (
         <div style={{ color: 'red' }}>{errors.password}</div>
       )}
 
-      <label htmlFor="confirmPassword">Confirm Password</label>
+      <label htmlFor="confirmPassword">{t('confirm_password')}</label>
       <input
         value={values.confirmPassword}
         onChange={handleChange}
         id="confirmPassword"
         type="password"
-        placeholder="Confirm password..."
+        placeholder={t('enter_confirm_password')}
         onBlur={handleBlur}
       />
       {errors.confirmPassword && touched.confirmPassword && (

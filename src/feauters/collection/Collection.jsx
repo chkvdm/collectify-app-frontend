@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import Loader from '../../components/Loader';
 import ItemsTable from './ItemsTable';
@@ -31,29 +32,31 @@ const Collection = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <img
-            src={collection.image}
-            alt="collection pic"
-            width="100"
-            height="100"
-          />
-          <div>
-            <h3>{collection.collectionName}</h3>
-          </div>
-          <div>
-            <h3>{collection.theme}</h3>
-          </div>
-          <div>
-            <h6>{collection.description}</h6>
-          </div>
-          <div>
-            <ItemsTable
-              collectionId={collectionId}
-              userId={collection.userId}
+        <div className="main-container">
+          <div className="container">
+            <Box
+              component="img"
+              sx={{ maxWidth: { xs: 250, md: 550 }, borderRadius: 1 }}
+              alt="collection pic"
+              src={collection.image}
             />
+            <Box sx={{ mt: 2 }}>
+              <h1>{collection.collectionName}</h1>
+            </Box>
+            <Box sx={{ mt: 1 }}>
+              <h3>{collection.theme}</h3>
+            </Box>
+            <Box>
+              <h6>{collection.description}</h6>
+            </Box>
+            <Box>
+              <ItemsTable
+                collectionId={collectionId}
+                userId={collection.userId}
+              />
+            </Box>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

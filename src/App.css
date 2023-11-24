@@ -4,9 +4,6 @@ body {
 }
 
 .App {
-  /* background: #74ebd5;
-  background: -webkit-linear-gradient(to right, #74ebd5, #acb6e5);
-  background: linear-gradient(to right, #74ebd5, #acb6e5); */
   background: var(--body_background_color_left);
   background: -webkit-linear-gradient(
     to right,
@@ -48,16 +45,21 @@ body {
 
   .card {
     flex: 0 0 auto;
-    margin-right: 5px;
+    margin-right: 10px;
   }
+}
+
+.MuiCard-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .teg-cloud {
   padding-left: 2.5em;
   padding-right: 2.5em;
   text-align: center;
-  /* background-color: white; */
-  background-color: var(--body_background_color);
+  background-color: white;
   text-align: center;
   display: flex;
   flex-wrap: nowrap;

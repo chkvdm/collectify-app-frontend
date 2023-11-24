@@ -31,7 +31,7 @@ const UsersTable = (props) => {
         accessorKey: 'id',
         header: 'Id',
         enableEditing: false,
-        size: 250,
+        size: 300,
       },
       {
         accessorKey: 'name',

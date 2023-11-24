@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 import LoginForm from './LoginForm';
 import Loader from '../../../components/Loader';
-// import '../../css/form.css';
+import '../../../css/form.css';
 import config from '../../../config.js';
 
 const LoginPage = (props) => {

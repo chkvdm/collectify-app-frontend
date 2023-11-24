@@ -517,7 +517,7 @@ function useDeleteItem() {
 const validateRequired = (value) => !!value.length;
 const validateTags = (tags) =>
   !!tags.length &&
-  tags.toLowerCase().match(/^#[a-zA-Z0-9]+(?: \s*#[a-zA-Z0-9]+)*$/);
+  tags.toLowerCase().match(/^#(?:[a-zA-Z0-9]+(?:\s*#[a-zA-Z0-9]+){0,2})?$/);
 
 function validateItem(item) {
   const errors = Object.fromEntries(
@@ -528,7 +528,7 @@ function validateItem(item) {
         : key === 'tags'
         ? validateTags(value)
           ? ''
-          : 'Invalid tags format. ex: #foo #bar'
+          : 'Invalid tags format. ex: #foo #bar. Max 3 tags.'
         : !validateRequired(value)
         ? `Field is Required, ${key}`
         : '',

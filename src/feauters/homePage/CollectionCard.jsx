@@ -17,29 +17,31 @@ const CollectionCard = (props) => {
   }
 
   return (
-    <Card sx={{ minWidth: 250, maxWidth: 250 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={props.collection.image}
-        title="collection img"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {props.collection.collectionName}
-        </Typography>
-        <Typography variant="body2" color="text.primary">
-          {props.collection.theme}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.collection.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleMore}>
-          {t('learn_more')}
-        </Button>
-      </CardActions>
-    </Card>
+    <div className="card">
+      <Card sx={{ width: 300 }}>
+        <CardMedia
+          sx={{ height: 140 }}
+          image={props.collection.image}
+          title="collection img"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.collection.collectionName}
+          </Typography>
+          <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
+            {props.collection.theme}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" noWrap="true">
+            {props.collection.description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleMore}>
+            {t('learn_more')}
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { Formik, Form, Field, FieldArray } from 'formik';
+import InputLabel from '@mui/material/InputLabel';
+import { TextareaAutosize } from '@mui/base';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
@@ -12,22 +14,7 @@ import Alert from '../../components/Alert';
 import PreviewImage from './PreviewImage';
 import Loader from '../../components/Loader';
 import config from '../../config';
-
-// const themes = [
-//   'Nature',
-//   'Vintage',
-//   'Tech',
-//   'Fashion',
-//   'Travel',
-//   'Books',
-//   'Foodie',
-//   'Art',
-//   'Music',
-//   'Sports',
-//   'Other',
-// ];
-
-// const types = ['date', 'checkbox', 'number', 'string', 'text'];
+import '../../css/formInput.css';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -80,7 +67,7 @@ const CreateCollectionForm = (props) => {
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div className="collection-form">
           <h1>{t('create_new_collection')}</h1>
           <Alert error={props.error} />
           <Formik
@@ -99,64 +86,74 @@ const CreateCollectionForm = (props) => {
           >
             {(props) => (
               <Form>
-                <div>
-                  <label htmlFor="name">{t('collection_name')}</label>
-                  <input
-                    id="name"
-                    placeholder={t('name_placeholder')}
-                    type="text"
-                    value={props.values.name}
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                  />
-                  {props.errors.name && props.touched.name && (
-                    <div style={{ color: 'red' }}>{props.errors.name}</div>
-                  )}
-
-                  <label htmlFor="theme">{t('theme')}</label>
-                  <select
-                    id="theme"
-                    value={props.values.theme}
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                  >
-                    <option value="" disabled="disabled">
-                      theme...
-                    </option>
-                    {themes.map((theme) => {
-                      return (
-                        <option key={theme.id} value={theme.theme}>
-                          {theme.theme}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  {props.errors.theme && props.touched.theme && (
-                    <div style={{ color: 'red' }}>{props.errors.theme}</div>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="description">{t('description')}</label>
-                  <textarea
+                <Box sx={{ display: 'flex' }}>
+                  <Box sx={{ mr: 2 }}>
+                    <InputLabel htmlFor="name">
+                      {t('collection_name')}
+                    </InputLabel>
+                    <Field
+                      id="name"
+                      type="text"
+                      name="name"
+                      placeholder={t('name_placeholder')}
+                      value={props.values.name}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                    />
+                    {props.errors.name && props.touched.name && (
+                      <div style={{ color: 'red' }}>{props.errors.name}</div>
+                    )}
+                  </Box>
+                  <Box sx={{ mr: 2 }}>
+                    <InputLabel htmlFor="theme">{t('theme')}</InputLabel>
+                    <Field
+                      id="theme"
+                      as="select"
+                      name="theme"
+                      value={props.values.theme}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                    >
+                      <option value="" disabled="disabled">
+                        {t('theme_select')}
+                      </option>
+                      {themes.map((theme) => {
+                        return (
+                          <option key={theme.id} value={theme.theme}>
+                            {theme.theme}
+                          </option>
+                        );
+                      })}
+                    </Field>
+                    {props.errors.theme && props.touched.theme && (
+                      <div style={{ color: 'red' }}>{props.errors.theme}</div>
+                    )}
+                  </Box>
+                </Box>
+                <Box>
+                  <InputLabel htmlFor="description">
+                    {t('description')}
+                  </InputLabel>
+                  <TextareaAutosize
                     id="description"
                     value={props.values.description}
                     onChange={props.handleChange}
                     placeholder={t('description_placeholder')}
-                    style={{ height: '100px', width: '300px' }}
+                    style={{ height: '100px', width: '476px' }}
                     onBlur={props.handleBlur}
-                  ></textarea>
+                  />
                   {props.errors.description && props.touched.description && (
                     <div style={{ color: 'red' }}>
                       {props.errors.description}
                     </div>
                   )}
-                </div>
-                <div>
+                </Box>
+                <Box>
                   <Button
                     component="label"
                     variant="contained"
                     startIcon={<CloudUploadIcon />}
+                    sx={{ mt: 2 }}
                   >
                     {t('upload_image')}
                     <VisuallyHiddenInput
@@ -168,32 +165,35 @@ const CreateCollectionForm = (props) => {
                     />
                   </Button>
                   {props.values.image && (
-                    <div>
+                    <Box sx={{ display: 'flex', mt: 2 }}>
                       <PreviewImage target={{ files: [props.values.image] }} />
-                      <Button variant="outlined" color="error">
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        sx={{ width: 30, height: 30 }}
+                      >
                         <DeleteForeverIcon
                           onClick={() => props.setFieldValue('image', '')}
                         />
                       </Button>
-                    </div>
+                    </Box>
                   )}
                   {props.errors.image && props.touched.image && (
                     <div style={{ color: 'red' }}>{props.errors.image}</div>
                   )}
-                </div>
-
+                </Box>
                 <FieldArray
                   name="optionalFields"
                   render={(arrayHelpers) => (
-                    <div>
+                    <Box>
                       {props.values.optionalFields.map((field, index) => (
-                        <div key={index}>
+                        <Box key={index} sx={{ display: 'flex' }}>
                           <Field name={`optionalFields.${index}.name`}>
                             {({ field, meta }) => (
-                              <div>
-                                <label htmlFor="fieldName">
+                              <Box sx={{ mr: 2 }}>
+                                <InputLabel htmlFor="fieldName">
                                   {t('field_name')}
-                                </label>
+                                </InputLabel>
                                 <input
                                   id="fieldName"
                                   placeholder={t('field_name_placeholder')}
@@ -205,22 +205,22 @@ const CreateCollectionForm = (props) => {
                                     {meta.error}
                                   </div>
                                 )}
-                              </div>
+                              </Box>
                             )}
                           </Field>
                           <Field name={`optionalFields.${index}.type`}>
                             {({ field, meta }) => (
-                              <div>
-                                <label htmlFor="fieldType">
+                              <Box sx={{ mr: 2 }}>
+                                <InputLabel htmlFor="fieldType">
                                   {t('field_type')}
-                                </label>
+                                </InputLabel>
                                 <select
                                   id="fieldType"
                                   value={field.value}
                                   {...field}
                                 >
                                   <option value="" disabled="disabled">
-                                    choose type...
+                                    {t('type_select')}
                                   </option>
                                   {types.map((type) => {
                                     return (
@@ -235,29 +235,40 @@ const CreateCollectionForm = (props) => {
                                     {meta.error}
                                   </div>
                                 )}
-                              </div>
+                              </Box>
                             )}
                           </Field>
-                          <Button variant="outlined" color="error">
+                          <Button
+                            variant="outlined"
+                            color="error"
+                            sx={{ width: 30, height: 30, mt: 6 }}
+                          >
                             <DeleteForeverIcon
                               onClick={() => arrayHelpers.remove(index)}
                             />
                           </Button>
-                        </div>
+                        </Box>
                       ))}
-                      <Button
-                        variant="contained"
-                        onClick={() =>
-                          // arrayHelpers.push({ name: '', type: types[0]?.type })
-                          arrayHelpers.push({ name: '', type: '' })
-                        }
-                      >
-                        {t('add_item_fields')}
-                      </Button>
-                      <Button type="submit" variant="contained">
-                        {t('submit')}
-                      </Button>
-                    </div>
+                      <Box>
+                        <Button
+                          variant="contained"
+                          onClick={() =>
+                            arrayHelpers.push({ name: '', type: '' })
+                          }
+                          sx={{ mt: 2, mr: 2 }}
+                        >
+                          {t('add_item_fields')}
+                        </Button>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          sx={{ mt: 2, mr: 2 }}
+                          color="success"
+                        >
+                          {t('submit')}
+                        </Button>
+                      </Box>
+                    </Box>
                   )}
                 />
               </Form>

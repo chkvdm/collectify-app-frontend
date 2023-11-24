@@ -17,42 +17,44 @@ const ItemCard = (props, { key }) => {
   }
 
   return (
-    <Card sx={{ minWidth: 250, maxWidth: 250 }}>
-      <CardHeader
-        title={props.item.itemName}
-        onClick={handleOpen}
-        style={{ cursor: 'pointer' }}
-      />
-      <CardContent>
-        {props.item.tags.map((tag) => (
-          <Typography
-            key={props.item.tags.indexOf(tag)}
-            variant="body2"
-            color="text.secondary"
+    <div className="card">
+      <Card sx={{ height: 200, width: 250 }}>
+        <CardHeader
+          title={props.item.itemName}
+          onClick={handleOpen}
+          style={{ cursor: 'pointer' }}
+        />
+        <CardContent>
+          {props.item.tags.map((tag) => (
+            <Typography
+              key={props.item.tags.indexOf(tag)}
+              variant="body2"
+              color="text.secondary"
+            >
+              {tag}
+            </Typography>
+          ))}
+        </CardContent>
+        <CardActions>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
           >
-            {tag}
-          </Typography>
-        ))}
-      </CardContent>
-      <CardActions>
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Box>
-            <FavoriteBorderIcon sx={{ color: 'red' }} />
-            {props.item.likes.length}
+            <Box>
+              <FavoriteBorderIcon sx={{ color: 'red', mr: 0.5 }} />
+              {props.item.likes.length}
+            </Box>
+            <Box>
+              {props.item.comments.length}
+              <CommentIcon sx={{ ml: 0.5 }} />
+            </Box>
           </Box>
-          <Box>
-            {props.item.comments.length}
-            <CommentIcon />
-          </Box>
-        </Box>
-      </CardActions>
-    </Card>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 
