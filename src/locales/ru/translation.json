@@ -34,6 +34,7 @@
   "field_type": "Тип",
   "type_select": "выберите тип...",
   "create_collection": "новая коллекция",
+  "create_item": "новый предмет",
   "most_large_collections": "Самые большие коллекции",
   "last_added_items": "Новые предметы",
   "learn_more": "подробнее",
@@ -41,5 +42,7 @@
   "add_comment_here": "Напишите комментарий здесь",
   "add_comment_placeholder": "Добавьте комментарий...",
   "comment": "отправить",
-  "login_for_comment": "войдите, чтобы оставить комментарий"
+  "login_for_comment": "войдите, чтобы оставить комментарий",
+  "oops": "Упс!",
+  "not_found": "Кажется, вы наткнулись на несуществующую страницу."
 }

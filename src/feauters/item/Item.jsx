@@ -272,7 +272,15 @@ const Item = () => {
             <Box>
               {userInfo ? (
                 <>
-                  <Box sx={{ pt: 1, pl: 3, pb: 3, bgcolor: '#fafafa' }}>
+                  <Box
+                    sx={{
+                      pt: 1,
+                      pl: 3,
+                      pb: 3,
+                      color: '#000',
+                      bgcolor: '#fafafa',
+                    }}
+                  >
                     <h2>{t('add_comment_here')}</h2>
                     <CommentForm {...{ handleSubmit }} />
                   </Box>
@@ -280,7 +288,10 @@ const Item = () => {
               ) : (
                 <>
                   <Box sx={{ pt: 1, pl: 3, pb: 1, bgcolor: '#fafafa' }}>
-                    <Link to="/login">
+                    <Link
+                      to="/login"
+                      style={{ color: 'primary', textDecoration: 'none' }}
+                    >
                       <h4>{t('login_for_comment')}</h4>
                     </Link>
                   </Box>

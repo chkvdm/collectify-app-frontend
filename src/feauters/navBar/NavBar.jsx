@@ -29,6 +29,7 @@ import Loader from '../../components/Loader';
 const NavBar = (props) => {
   const { t } = useTranslation();
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem('collectify:token') || false;
@@ -78,6 +79,17 @@ const NavBar = (props) => {
     setAnchorElUser(null);
   };
 
+  const handleSearch = (e) => {
+    if (e.key === 'Enter') {
+      navigate(`/search/${searchValue}`);
+      setSearchValue('');
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <div>
       {loading ? (
@@ -121,6 +133,9 @@ const NavBar = (props) => {
                     placeholder={t('search')}
                     sx={{ width: 150 }}
                     inputProps={{ 'aria-label': 'search' }}
+                    value={searchValue}
+                    onChange={handleChange}
+                    onKeyDown={handleSearch}
                   />
                 </Search>
 

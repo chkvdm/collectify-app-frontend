@@ -19,6 +19,7 @@ import {
 } from '@tanstack/react-query';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useTranslation } from 'react-i18next';
 
 import Loader from '../../components/Loader';
 import { getItemData, allTypes } from './makeData';
@@ -35,6 +36,7 @@ const ItemsTable = (props) => {
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -121,11 +123,12 @@ const ItemsTable = (props) => {
             defaultValue: k,
             error: !!validationErrors?.[k],
             helperText: validationErrors?.[k],
-            onFocus: () =>
+            onFocus: () => {
               setValidationErrors({
                 ...validationErrors,
                 [k]: undefined,
-              }),
+              });
+            },
           },
         };
       }
@@ -298,7 +301,7 @@ const ItemsTable = (props) => {
     onEditingRowSave: handleSaveItem,
     renderRowActions: ({ row, table }) => (
       <div>
-        {userInfo?.id === props.userId || token?.role === 'admin' ? (
+        {userInfo?.id === props.userId || userInfo?.role === 'admin' ? (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
             <Tooltip title="Delete">
               <IconButton
@@ -341,14 +344,14 @@ const ItemsTable = (props) => {
     ),
     renderTopToolbarCustomActions: ({ table }) => (
       <div>
-        {userInfo?.id === props.userId || token?.role === 'admin' ? (
+        {userInfo?.id === props.userId || userInfo?.role === 'admin' ? (
           <Button
             variant="contained"
             onClick={() => {
               table.setCreatingRow(true);
             }}
           >
-            Create New Item
+            {t('create_item')}
           </Button>
         ) : (
           <Box></Box>
@@ -364,8 +367,6 @@ const ItemsTable = (props) => {
     },
   });
 
-  // const columnVirtualizerInstanceRef = useRef(null); // что-то для горизонтального скрола
-
   return (
     <div>
       {loading ? (
@@ -373,8 +374,6 @@ const ItemsTable = (props) => {
       ) : (
         <MaterialReactTable
           table={table}
-          // columnVirtualizerInstanceRef={columnVirtualizerInstanceRef}
-          // columnVirtualizerOptions={{ overscan: 4 }}
           enableColumnVirtualization
           enableColumnPinning
         />

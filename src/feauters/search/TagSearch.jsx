@@ -5,6 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
+import { Box } from '@mui/material';
 
 import config from '../../config';
 import Loader from '../../components/Loader';
@@ -41,33 +42,45 @@ const TagSearch = () => {
   };
 
   return (
-    <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <List
-          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        >
-          {results?.map((result) => (
-            <React.Fragment key={result.id}>
-              <ListItem
-                alignItems="flex-start"
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleClick(result.collection, result.id)}
-              >
-                <ListItemText
-                  primaryTypographyProps={{ fontSize: '20px' }}
-                  primary={result.name}
-                  secondary={
-                    <React.Fragment>{result.tags.join(' ')}</React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider component="li" />
-            </React.Fragment>
-          ))}
-        </List>
-      )}
+    <div className="main-container">
+      <div className="container">
+        <Box sx={{ background: '#fff', width: '100%', borderRadius: 1 }}>
+          {loading ? (
+            <Loader />
+          ) : (
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                ml: 5,
+              }}
+            >
+              {results?.map((result) => (
+                <Box key={result.id}>
+                  <ListItem
+                    alignItems="flex-start"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleClick(result.collection, result.id)}
+                  >
+                    <ListItemText
+                      primaryTypographyProps={{
+                        fontSize: '20px',
+                        color: 'primary',
+                      }}
+                      primary={result.name}
+                      secondary={
+                        <React.Fragment>{result.tags.join(' ')}</React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider component="li" />
+                </Box>
+              ))}
+            </List>
+          )}
+        </Box>
+      </div>
     </div>
   );
 };

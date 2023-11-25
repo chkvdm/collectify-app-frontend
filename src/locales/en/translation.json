@@ -34,6 +34,7 @@
   "field_type": "Type",
   "type_select": "choose type...",
   "create_collection": "сreate collection",
+  "create_item": "create new item",
   "most_large_collections": "Most large collections",
   "last_added_items": "New Item",
   "learn_more": "learn more",
@@ -41,5 +42,7 @@
   "add_comment_here": "Add your comment here!",
   "add_comment_placeholder": "Add a comment...",
   "comment": "comment",
-  "login_for_comment": "Log In to add a comment"
+  "login_for_comment": "Log In to add a comment",
+  "oops": "Oops!",
+  "not_found": "It seems like you've stumbled upon a page that doesn't exist."
 }

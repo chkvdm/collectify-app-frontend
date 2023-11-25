@@ -15,6 +15,9 @@ import AdminPanel from './feauters/adminPanel/AdminPanel';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import UserStatus from './components/UserStatus';
 import TagSearch from './feauters/search/TagSearch';
+import InputSearch from './feauters/search/InputSeqrch';
+import NotFound from './components/NotFound';
+
 import './App.css';
 
 function App() {
@@ -40,11 +43,13 @@ function App() {
               path="/login"
               element={<Login {...{ setLoggedIn }} />}
             ></Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
           <Route element={<UserStatus />}>
             <Route element={<WithNav {...{ loggedIn, lang, setLang }} />}>
               <Route path="/" element={<Home />}></Route>
               <Route path="/tag/search/:query" element={<TagSearch />} />
+              <Route path="/search/:query" element={<InputSearch />} />
               <Route
                 path="/collection/:collectionId"
                 element={<Collection />}
@@ -54,7 +59,6 @@ function App() {
                 element={<Item />}
               />
               <Route path="/user/account/:userId" element={<Profile />} />
-
               <Route element={<ProtectedRoutes {...{ loggedIn }} />}>
                 <Route
                   path="/user/account/:userId/create-collection"

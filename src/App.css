@@ -4,6 +4,7 @@ body {
 }
 
 .App {
+  color: var(--body_color);
   background: var(--body_background_color_left);
   background: -webkit-linear-gradient(
     to right,

@@ -152,8 +152,7 @@ const CreateCollectionForm = (props) => {
                   <Button
                     component="label"
                     variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                    sx={{ mt: 2 }}
+                    startIcon={<CloudUploadIcon sx={{ color: '#fff' }} />}
                   >
                     {t('upload_image')}
                     <VisuallyHiddenInput
