@@ -24,7 +24,7 @@ const InputSearch = () => {
       .then((data) => {
         const { resultsHits } = data;
 
-        const results = {
+        const tagResults = {
           collections: [],
           items: [],
         };
@@ -34,14 +34,14 @@ const InputSearch = () => {
 
           if (_index === 'search-collections') {
             const { id, name, theme } = _source;
-            results.collections.push({ id, name, theme });
+            tagResults.collections.push({ id, name, theme });
           } else if (_index === 'search-items') {
             const { id, collection, name, tags } = _source;
-            results.items.push({ id, collection, name, tags });
+            tagResults.items.push({ id, collection, name, tags });
           }
         });
 
-        setResults(results);
+        setResults(tagResults);
         setLoading(false);
       })
       .catch((err) => {
@@ -85,7 +85,7 @@ const InputSearch = () => {
                         color: 'primary',
                       }}
                       primary={result.name}
-                      secondary={<Fragment>{result.tags.join(' ')}</Fragment>}
+                      secondary={<Fragment>{result?.tags?.join(' ')}</Fragment>}
                     />
                   </ListItem>
                   <Divider component="li" />

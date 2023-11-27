@@ -70,7 +70,9 @@ const TagSearch = () => {
                       }}
                       primary={result.name}
                       secondary={
-                        <React.Fragment>{result.tags.join(' ')}</React.Fragment>
+                        <React.Fragment>
+                          {result?.tags?.join(' ')}
+                        </React.Fragment>
                       }
                     />
                   </ListItem>
