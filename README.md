@@ -5,7 +5,7 @@ This repo contain a client side code.
 
 > Main page.
 
-<img width="750" alt="collectify-main-page" src="https://asset.cloudinary.com/daz6gyr7k/aa7c806a90df27f6036a1165e9429d6b">
+<img width="750" alt="collectify-main-page" src="https://res.cloudinary.com/daz6gyr7k/image/upload/fl_preserve_transparency/v1718092087/collectify-collection-image/collectify-main-page_atuels.jpg?_s=public-apps">
 
 Key Features:
 
