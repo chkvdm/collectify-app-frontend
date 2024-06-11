@@ -3,9 +3,6 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-///////////
-// import '../../css/collectionForm.css';
-///////////
 import config from '../../config';
 import Loader from '../../components/Loader';
 import CreateCollectionForm from './CreateCollectionForm';

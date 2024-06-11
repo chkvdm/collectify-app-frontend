@@ -385,7 +385,6 @@ const ItemsTable = (props) => {
 //CREATE hook
 function useCreateItem(collectionId) {
   const queryClient = useQueryClient();
-  // const { collectionId } = useParams();
   return useMutation({
     mutationFn: async (item) => {
       const newItem = async () => {
